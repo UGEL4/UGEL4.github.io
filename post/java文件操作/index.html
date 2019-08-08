@@ -122,6 +122,54 @@ try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也
         } 
 </code></pre>
 
+<h2 id="层级打印目录与文件">层级打印目录与文件</h2>
+
+<p>打印一个树形目录：
+&gt;
+|-a
+   |-b
+     |-c
+   |-d
+     |-e
+|-f</p>
+
+<p>备忘代码：</p>
+
+<pre><code>public static void main(String[] args) {
+		/*
+		 * 	从键盘接收一个文件夹路径,把文件夹中的所有文件以及文件夹的名字按层级打印
+		 * */
+		String path = &quot;D:\\新建文件夹&quot;;
+		File file = new File(path);
+		System.out.println(file.getName());
+		print(file,0);
+	}
+
+	public static void print(File file, int level) {
+		File[] list = file.listFiles();
+		if (list == null) {
+			System.out.println(&quot;找不到文件夹路径&quot;);
+		}
+		for (File f : list) {
+			for (int i = 0; i &lt;= level; i++) {
+				if(i == 0) {
+					System.out.print(&quot;|__&quot;);
+				}else {
+					System.out.print(&quot;__&quot;);
+				}
+			}
+			if (f.isDirectory()) {
+				System.out.println(f.getName());
+				print(f, level + 1);
+			} else {
+				System.out.println(f.getName());
+			}
+		}
+		//return --level;//当这样递归调用时：print(f, ++level)，为了查完内层后退出外层时，
+		//打印的是外层的空格数，所以要层数-1。如果不想记录层数，就这样调用：print(f, level + 1)
+	}
+</code></pre>
+
 <p>持续更新&hellip;&hellip;</p>
 
     </div>
