@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>多态的理解 // panyinglang</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="panyinglang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://panyinglang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="多态的理解"/>
+<meta name="twitter:description" content="多态 多态 　多态性是允许你将父对象设置成为一个或更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同的方式运作。简单的说，就是一句话：允许将子类类型的指针赋值给父类类型的指针。多态性在Object Pascal和C&#43;&#43;中都是通过虚函数实现的。
+　这里用java来实现，实现一下最简单的多态。
+ 例题： 当顾客在商场购物时，卖家需要根据顾客的需求提取商品。对于汽车销售商场也是如此。用户需要先指定购买的车型，然后商家去提取该车型的汽车。模拟该场景，编写一个父类Car，可以获得车的具体信息，包括车品牌，价格等，然后编写多个子类，用户输入不同的品牌，要求得到对应的车和价格，例如输入“宝马”，输出：您获得一辆宝马车，价格30万。
+ Car类：
+public class Car { private String carName; private double price; public Car() { super(); } public Car(String carName, double price) { super(); this.carName = carName; this.price = price; } public String getCarName() { return carName; } public void setCarName(String carName) { this.carName = carName; } public double getPrice() { return price; } public void setPrice(double price) { this."/>
+
+    <meta property="og:title" content="多态的理解" />
+<meta property="og:description" content="多态 多态 　多态性是允许你将父对象设置成为一个或更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同的方式运作。简单的说，就是一句话：允许将子类类型的指针赋值给父类类型的指针。多态性在Object Pascal和C&#43;&#43;中都是通过虚函数实现的。
+　这里用java来实现，实现一下最简单的多态。
+ 例题： 当顾客在商场购物时，卖家需要根据顾客的需求提取商品。对于汽车销售商场也是如此。用户需要先指定购买的车型，然后商家去提取该车型的汽车。模拟该场景，编写一个父类Car，可以获得车的具体信息，包括车品牌，价格等，然后编写多个子类，用户输入不同的品牌，要求得到对应的车和价格，例如输入“宝马”，输出：您获得一辆宝马车，价格30万。
+ Car类：
+public class Car { private String carName; private double price; public Car() { super(); } public Car(String carName, double price) { super(); this.carName = carName; this.price = price; } public String getCarName() { return carName; } public void setCarName(String carName) { this.carName = carName; } public double getPrice() { return price; } public void setPrice(double price) { this." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://panyinglang.github.io/post/%E5%A4%9A%E6%80%81%E7%9A%84%E7%90%86%E8%A7%A3/" />
+<meta property="article:published_time" content="2019-07-27T15:35:11&#43;08:00"/>
+<meta property="article:modified_time" content="2019-07-27T15:35:11&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://panyinglang.github.io/"><img class="app-header-avatar" src="/image/avatar.jpg" alt="panyinglang" /></a>
+      <h1>panyinglang</h1>
+      <p>New Bee</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/panyinglang"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">多态的理解</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 27, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="多态">多态</h1>
+
+<h2 id="多态-1">多态</h2>
+
+<p>　　多态性是允许你将父对象设置成为一个或更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同的方式运作。简单的说，就是一句话：允许将子类类型的指针赋值给父类类型的指针。多态性在Object Pascal和C++中都是通过虚函数实现的。</p>
+
+<p>　　这里用java来实现，实现一下最简单的多态。</p>
+
+<blockquote>
+<p>例题：
+当顾客在商场购物时，卖家需要根据顾客的需求提取商品。对于汽车销售商场也是如此。用户需要先指定购买的车型，然后商家去提取该车型的汽车。模拟该场景，编写一个父类Car，可以获得车的具体信息，包括车品牌，价格等，然后编写多个子类，用户输入不同的品牌，要求得到对应的车和价格，例如输入“宝马”，输出：您获得一辆宝马车，价格30万。</p>
+</blockquote>
+
+<p>Car类：</p>
+
+<pre><code>public class Car {
+	private String carName;
+	private double price;
+	
+	public Car() {
+		super();
+	}
+
+	public Car(String carName, double price) {
+		super();
+		this.carName = carName;
+		this.price = price;
+	}
+
+	public String getCarName() {
+		return carName;
+	}
+
+	public void setCarName(String carName) {
+		this.carName = carName;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return &quot;Car [carName=&quot; + carName + &quot;, price=&quot; + price + &quot;]&quot;;
+	}
+	//输出Car的对象的信息
+	public void print() {
+		System.out.println(toString());
+	}
+	
+}
+</code></pre>
+
+<p>Bmw类：</p>
+
+<pre><code>public class Bmw extends Car {
+	public Bmw() {
+		super();
+	}
+	
+	public Bmw(String name, double price) {
+		super(name,price);
+	}
+	//重写print（），输出Bmw对象信息
+	public void print() {
+		System.out.println(getCarName() + &quot;车，价格&quot; + getPrice());
+	}
+}
+</code></pre>
+
+<p>Lamborghini类：</p>
+
+<pre><code>public class Lamborghini extends Car {
+	public Lamborghini() {}
+	
+	public Lamborghini(String name, double price) {
+		super(name, price);
+	}
+	//重写print（），输出Lamborghini对象信息
+	public void print() {
+		System.out.println(getCarName() + &quot;车，价格&quot; + getPrice());
+	}
+}
+</code></pre>
+
+<p>CarTest测试类：</p>
+
+<pre><code>import java.text.Collator;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class CarTest {
+	public static void main(String[] args) {
+		String 		LMB 		= &quot;兰博基尼&quot;;
+		String 		BMW 		= &quot;宝马&quot;;
+		Scanner 	sc 			= new Scanner(System.in);
+		Collator 	co 			= Collator.getInstance(Locale.CHINA);//用来比较汉字
+		Car 		car 		= new Car(&quot;车类&quot;, 1.0);
+		Car 		bmw 		= new Bmw(&quot;宝马&quot;,1000000);
+		Car 		lamborghini = new Lamborghini(&quot;兰博基尼&quot;, 3000000);
+		
+		System.out.println(&quot;输入车型：&quot;);
+		String str = sc.nextLine();
+		str = str.trim();
+		
+		if (co.compare(str, BMW) == 0) {
+			print(bmw);
+		} else if (co.compare(str, LMB) == 0) {
+			print(lamborghini);
+		} else {
+			print(car);
+		}
+		
+		sc.close();
+	}
+
+	private static void print(Car car) {
+		//判断对象类型
+		if (car instanceof Bmw) {
+			((Bmw) car).print();
+		} else if (car instanceof Lamborghini) {
+			((Lamborghini) car).print();
+		} else {
+			car.print();
+		}
+	}
+}
+</code></pre>
+
+<hr />
+
+<p>　　主要看测试类的 print 方法，print 方法首先判断   Car 对象是哪个类的对象，由判断执行不同的方法。在判断过程使用了  instanceof 运算符，它是用来判断对象类型的一个运算符。当判断出它的类型之后，再对其进行类型转换，得到原始类型后就可以调用它的类所特有的方法了。</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>快速排序备忘录 // panyinglang</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="panyinglang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://panyinglang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="快速排序备忘录"/>
+<meta name="twitter:description" content="快速排序 java实现 原理 　快速排序的原理：选择一个关键值作为基准值。比基准值小的都在左边序列（一般是无序的），比基准值大的都在右边（一般是无序的）。一般选择序列的第一个元素。
+　一次循环：从后往前比较，用基准值和最后一个值比较，如果比基准值小的交换位置，如果没有继续比较下一个，直到找到第一个比基准值小的值才交换。找到这个值之后，又从前往后开始比较，如果有比基准值大的，交换位置，如果没有继续比较下一个，直到找到第一个比基准值大的值才交换。直到从前往后的比较索引&gt;从后往前比较的索引，结束第一次循环，此时，对于基准值来说，左右两边就是有序的了。接着分别比较左右两边的序列，重复上述的循环。
+例如: 数组 int[] arr={5,2,8,4,9,1}; 第一趟排序：选 5 为关键字,low=0,high=5 从 high 开始由，后向前找，找到比 5 小的第一个数 a[5]=1,进行替换 排序结果为:1 2 8 4 9 5 从 low 开始向后搜索,找到比 5 小的,交换 1 2 5 4 9 8 从 high 开始由，后向前找，找到比 5 小,交换 1 2 4 5 9 8 直至 low 与 high 相遇重合,第一趟排序结束 以关键字为界,分成左右两个子序列,左边都比 5 小,右边都比 5 大 排序结果:1 2 4 5 9 8
+第二趟排序： 以相同的方式排序左子序列 1 2 4 选 1 为关键字 ,low=0,high=2 从 high 开始由，后向前找,找到比 1 小,没有,直至 low 与 high 相遇重合,第二趟 排序结束 第二趟以 1 为界,将左子序列分为两个序列,左边没有数据,右边 2,4 两个序列 排序结果: 1 2 4 5 9 8"/>
+
+    <meta property="og:title" content="快速排序备忘录" />
+<meta property="og:description" content="快速排序 java实现 原理 　快速排序的原理：选择一个关键值作为基准值。比基准值小的都在左边序列（一般是无序的），比基准值大的都在右边（一般是无序的）。一般选择序列的第一个元素。
+　一次循环：从后往前比较，用基准值和最后一个值比较，如果比基准值小的交换位置，如果没有继续比较下一个，直到找到第一个比基准值小的值才交换。找到这个值之后，又从前往后开始比较，如果有比基准值大的，交换位置，如果没有继续比较下一个，直到找到第一个比基准值大的值才交换。直到从前往后的比较索引&gt;从后往前比较的索引，结束第一次循环，此时，对于基准值来说，左右两边就是有序的了。接着分别比较左右两边的序列，重复上述的循环。
+例如: 数组 int[] arr={5,2,8,4,9,1}; 第一趟排序：选 5 为关键字,low=0,high=5 从 high 开始由，后向前找，找到比 5 小的第一个数 a[5]=1,进行替换 排序结果为:1 2 8 4 9 5 从 low 开始向后搜索,找到比 5 小的,交换 1 2 5 4 9 8 从 high 开始由，后向前找，找到比 5 小,交换 1 2 4 5 9 8 直至 low 与 high 相遇重合,第一趟排序结束 以关键字为界,分成左右两个子序列,左边都比 5 小,右边都比 5 大 排序结果:1 2 4 5 9 8
+第二趟排序： 以相同的方式排序左子序列 1 2 4 选 1 为关键字 ,low=0,high=2 从 high 开始由，后向前找,找到比 1 小,没有,直至 low 与 high 相遇重合,第二趟 排序结束 第二趟以 1 为界,将左子序列分为两个序列,左边没有数据,右边 2,4 两个序列 排序结果: 1 2 4 5 9 8" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://panyinglang.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%A4%87%E5%BF%98%E5%BD%95/" />
+<meta property="article:published_time" content="2019-07-25T20:53:56&#43;08:00"/>
+<meta property="article:modified_time" content="2019-07-25T20:53:56&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://panyinglang.github.io/"><img class="app-header-avatar" src="/image/avatar.jpg" alt="panyinglang" /></a>
+      <h1>panyinglang</h1>
+      <p>New Bee</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/panyinglang"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">快速排序备忘录</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 25, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="快速排序-java实现">快速排序 java实现</h1>
+
+<h2 id="原理">原理</h2>
+
+<p>　　快速排序的原理：选择一个关键值作为基准值。比基准值小的都在左边序列（一般是无序的），比基准值大的都在右边（一般是无序的）。一般选择序列的第一个元素。</p>
+
+<p>　　一次循环：从后往前比较，用基准值和最后一个值比较，如果比基准值小的交换位置，如果没有继续比较下一个，直到找到第一个比基准值小的值才交换。找到这个值之后，又从前往后开始比较，如果有比基准值大的，交换位置，如果没有继续比较下一个，直到找到第一个比基准值大的值才交换。直到从前往后的比较索引&gt;从后往前比较的索引，结束第一次循环，此时，对于基准值来说，左右两边就是有序的了。接着分别比较左右两边的序列，重复上述的循环。</p>
+
+<p>例如: 数组 int[] arr={5,2,8,4,9,1};
+第一趟排序：选 5 为关键字,low=0,high=5
+从 high 开始由，后向前找，找到比 5 小的第一个数 a[5]=1,进行替换
+排序结果为:1 2 8 4 9 5
+从 low 开始向后搜索,找到比 5 小的,交换
+1 2 5 4 9 8
+从 high 开始由，后向前找，找到比 5 小,交换
+1 2 4 5 9 8
+直至 low 与 high 相遇重合,第一趟排序结束
+以关键字为界,分成左右两个子序列,左边都比 5 小,右边都比 5 大
+排序结果:1 2 4 5 9 8</p>
+
+<p>第二趟排序：
+以相同的方式排序左子序列
+ 1 2 4
+选 1 为关键字 ,low=0,high=2
+从 high 开始由，后向前找,找到比 1 小,没有,直至 low 与 high 相遇重合,第二趟
+排序结束
+第二趟以 1 为界,将左子序列分为两个序列,左边没有数据,右边 2,4 两个序列
+排序结果:
+1 2 4 5 9 8</p>
+
+<p>以相同的方式排序子序列
+ 2 4
+选 2 位关键字 ,low=1,high=2
+从 high 开始由，后向前找,找到比 2 小,没有,直至 low 与 high 相遇重合,第三趟
+排序结束
+第三趟以 2 为界,将子序列分为两个序列,左边没有数据,右边 4 两个序列
+排序结果:
+1 2 4 5 9 8</p>
+
+<p>第四趟排序：
+以相同的方式排序子序列
+ 9,8
+选 9 位关键字 ,low=4,high=5
+从 high 开始由，后向前找,找到比 9 小,交换 8,9
+第四趟以 9 为界,将子序列分为两个序列,左边 8,右边没有数据
+排序结果:
+1 2 4 5 8 9
+快速排序是递归思想,可以采用递归的方式进行排序</p>
+
+<hr />
+
+<h2 id="java代码">Java代码</h2>
+
+<pre><code>public static  void quickSort(int array[],int start,int end) {
+		int left = start;
+		int right = end;
+		int key = array[start];
+		while (left &lt; right) {
+			//从后往前找，找到比key小的数，就交换位置
+			while (left &lt; right &amp;&amp; key &lt;= array[right]) {
+				right--;
+			}
+			if (key &gt; array[right]) {
+				int temp = array[left];
+				array[left] = array[right];
+				array[right] = temp;
+			}
+			
+			//从前往后比较，找到比key大的数，交换位置
+			while (right &gt; left &amp;&amp; key &gt;= array[left]) {
+				left++;
+			}
+			if (key &lt; array[left]) {
+				int temp = array[left];
+				array[left] = array[right];
+				array[right] = temp;
+			}
+		}
+		
+		if (left &gt; start){
+			quickSort(array, start, left - 1);//左边序列,第一个索引位置到关键字索引-1
+		}
+		if (right &lt; end){
+			quickSort(array, right + 1, end);//右边序列,从关键字索引+1到最后一个位置
+		}
+}
+</code></pre>
+
+<hr />
+
+<p>忘记了就来看一下。</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

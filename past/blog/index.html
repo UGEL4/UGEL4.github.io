@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Blog // panyinglang</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="panyinglang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://panyinglang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Blog"/>
+<meta name="twitter:description" content="用Spring框架搭建简单的登录注册与查询模块后台的最基本流程（配合maven和oracle数据库） 首先：修改pom.xml文件： 主要是将数据库连接插件下载到本地仓库 pom.xml文件的内容：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;2.1.3.RELEASE&lt;/version&gt; &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt; &lt;/parent&gt; &lt;groupId&gt;com.gem&lt;/groupId&gt; &lt;artifactId&gt;erp&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;name&gt;erp&lt;/name&gt; &lt;description&gt;erp&lt;/description&gt; &lt;properties&gt; &lt;java.version&gt;1.8&lt;/java.version&gt; &lt;/properties&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.projectlombok&lt;/groupId&gt; &lt;artifactId&gt;lombok&lt;/artifactId&gt; &lt;optional&gt;true&lt;/optional&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;com.oracle&lt;/groupId&gt; &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt; &lt;version&gt;12.1.0.1-atlassian-hosted&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;/plugin&gt; &lt;/plugins&gt; &lt;/build&gt; &lt;/project&gt;  第一步： 新建java类，该类对应数据库中所需的表。类中定义好自己需要的属性。下载lombok插件,该插件会自动生成对应属性的方法，操作的方法是如下： /** * 员工实体类 */ //利用lombok工具自动生成构造,get/set,hashcode,equals,toString方法 @Data @NoArgsConstructor @AllArgsConstructor //springdata JPA自动映射实体类和表的关系 @Entity @Table(name = &quot;ERP_EMP&quot;) public class Employee { //属性 @Id @GeneratedValue(strategy = GenerationType."/>
+
+    <meta property="og:title" content="Blog" />
+<meta property="og:description" content="用Spring框架搭建简单的登录注册与查询模块后台的最基本流程（配合maven和oracle数据库） 首先：修改pom.xml文件： 主要是将数据库连接插件下载到本地仓库 pom.xml文件的内容：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;2.1.3.RELEASE&lt;/version&gt; &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt; &lt;/parent&gt; &lt;groupId&gt;com.gem&lt;/groupId&gt; &lt;artifactId&gt;erp&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;name&gt;erp&lt;/name&gt; &lt;description&gt;erp&lt;/description&gt; &lt;properties&gt; &lt;java.version&gt;1.8&lt;/java.version&gt; &lt;/properties&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.projectlombok&lt;/groupId&gt; &lt;artifactId&gt;lombok&lt;/artifactId&gt; &lt;optional&gt;true&lt;/optional&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;com.oracle&lt;/groupId&gt; &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt; &lt;version&gt;12.1.0.1-atlassian-hosted&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;/plugin&gt; &lt;/plugins&gt; &lt;/build&gt; &lt;/project&gt;  第一步： 新建java类，该类对应数据库中所需的表。类中定义好自己需要的属性。下载lombok插件,该插件会自动生成对应属性的方法，操作的方法是如下： /** * 员工实体类 */ //利用lombok工具自动生成构造,get/set,hashcode,equals,toString方法 @Data @NoArgsConstructor @AllArgsConstructor //springdata JPA自动映射实体类和表的关系 @Entity @Table(name = &quot;ERP_EMP&quot;) public class Employee { //属性 @Id @GeneratedValue(strategy = GenerationType." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://panyinglang.github.io/past/blog/" />
+<meta property="article:published_time" content="2019-07-17T20:39:52&#43;08:00"/>
+<meta property="article:modified_time" content="2019-07-17T20:39:52&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://panyinglang.github.io/"><img class="app-header-avatar" src="/image/avatar.jpg" alt="panyinglang" /></a>
+      <h1>panyinglang</h1>
+      <p>New Bee</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/panyinglang"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Blog</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 17, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="用spring框架搭建简单的登录注册与查询模块后台的最基本流程-配合maven和oracle数据库">用Spring框架搭建简单的登录注册与查询模块后台的最基本流程（配合maven和oracle数据库）</h1>
+
+<h2 id="首先-修改pom-xml文件">首先：修改pom.xml文件：</h2>
+
+<h3 id="主要是将数据库连接插件下载到本地仓库">主要是将数据库连接插件下载到本地仓库</h3>
+
+<p>pom.xml文件的内容：</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.1.3.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.gem&lt;/groupId&gt;
+    &lt;artifactId&gt;erp&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;erp&lt;/name&gt;
+    &lt;description&gt;erp&lt;/description&gt;
+
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.oracle&lt;/groupId&gt;
+            &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;
+            &lt;version&gt;12.1.0.1-atlassian-hosted&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+<h2 id="第一步">第一步：</h2>
+
+<h3 id="新建java类-该类对应数据库中所需的表-类中定义好自己需要的属性-下载lombok插件-该插件会自动生成对应属性的方法-操作的方法是如下">新建java类，该类对应数据库中所需的表。类中定义好自己需要的属性。下载lombok插件,该插件会自动生成对应属性的方法，操作的方法是如下：</h3>
+
+<pre><code>/**
+ * 员工实体类
+ */
+//利用lombok工具自动生成构造,get/set,hashcode,equals,toString方法
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+//springdata JPA自动映射实体类和表的关系
+@Entity
+@Table(name = &quot;ERP_EMP&quot;)
+public class Employee {
+    //属性
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;emp_id&quot;)
+    @SequenceGenerator(name = &quot;emp_id&quot;, sequenceName = &quot;erp_emp_id&quot;, initialValue = 1, allocationSize = 1)
+    private Long id;
+    //员工表中的名字是非空唯一的
+    @Column(nullable = false, unique = true)
+    private String name;
+    @Column
+    @Enumerated(EnumType.ORDINAL)
+    private Gender gender;//枚举类型
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date startDate;//日期类型
+    @Column
+    private Double salary;
+}
+</code></pre>
+
+<p>以上代码会在数据库中生成一个名为ERP_EMP的表，表中的项为类中的属性。</p>
+
+<h2 id="第二步">第二步：</h2>
+
+<h3 id="创建连接数据库的dao接口-通过继承spring框架的jparepository类-接口的定义变得异常简单-例如">创建连接数据库的DAO接口，通过继承Spring框架的JpaRepository类，接口的定义变得异常简单！例如:</h3>
+
+<pre><code>import org.springframework.data.jpa.repository.JpaRepository;
+
+/**
+ * 员工数据访问对象,定义了所有的员工增删改查方法
+ */
+public interface EmployeeDao extends JpaRepository&lt;Employee, Long&gt; {
+
+}
+</code></pre>
+
+<p>这个接口的定义就十分简单了。而连接用户登录表的接口就需要定义自己需要的方法：</p>
+
+<pre><code>package com.example.demo.dao;
+
+import com.example.demo.Entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface UserDao extends JpaRepository&lt;User, Long&gt; {
+
+    //JPQL
+    @Query(&quot;from User where username=?1 and password=?2&quot;)
+    User login(String username, String password);
+
+    //检测用户名是否已经存在
+    @Query(&quot;from User where username=?1&quot;)
+    User check(String username);
+}
+</code></pre>
+
+<h2 id="第三步">第三步：</h2>
+
+<h3 id="创建表查询控制类">创建表查询控制类</h3>
+
+<p>在SpringMVC 中，控制器Controller 负责处理由DispatcherServlet 分发的请求，它把用户请求的数据经过业务处理层处理之后封装成一个Model ，然后再把该Model 返回给对应的View 进行展示。在SpringMVC 中提供了一个非常简便的定义Controller 的方法，你无需继承特定的类或实现特定的接口，只需使用@Controller 标记一个类是Controller ，然后使用@RequestMapping 和@RequestParam 等一些注解用以定义URL 请求和Controller 方法之间的映射，这样的Controller 就能被外界访问到。此外Controller 不会直接依赖于HttpServletRequest 和HttpServletResponse 等HttpServlet 对象，它们可以通过Controller 的方法参数灵活的获取到。
+1.</p>
+
+<pre><code>package com.example.demo.controller;
+
+import com.example.demo.dao.EmployeeDao;
+import com.example.demo.Entity.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(&quot;/emp&quot;)
+public class EmpController {
+
+    @Autowired
+    EmployeeDao employeeDao;
+
+    //分页查询数据
+    @RequestMapping(&quot;/list&quot;)
+    public String list(Model model) {
+        Page&lt;Employee&gt; page = employeeDao.findAll(PageRequest.of(0, 3));
+        //把分页整个数据对象存入模型数据范围
+        model.addAttribute(&quot;page&quot;,page);
+        return &quot;list&quot;;
+    }
+}
+</code></pre>
+
+<p>2.</p>
+
+<pre><code>package com.example.demo.controller;
+
+import com.example.demo.dao.UserDao;
+import com.example.demo.Entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+//控制器
+@Controller
+//用户模块窄化处理
+@RequestMapping(&quot;/user&quot;)
+public class UserController {
+    //依赖注入用户DAO
+    @Autowired
+    UserDao userDao;
+
+    //登录方法
+    @RequestMapping(&quot;/login&quot;)
+    public void login(String username, String password, HttpSession session, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        //登录的本质就是查询数据库中是否用户名和密码都匹配用户输入的账户
+        User user = userDao.login(username, password);
+        if (user == null) {
+            //登录失败
+            out.print(0);
+        } else {
+            //登录成功
+            //记录用户登录状态
+            session.setAttribute(&quot;user&quot;, user);
+            out.print(1);
+        }
+    }
+
+    //登出方法
+    @RequestMapping(&quot;/logout&quot;)
+    public String logout(HttpSession session) {
+        //删除session中记录的用户信息
+        session.invalidate();
+        //跳转登录页面
+        return &quot;index&quot;;
+    }
+
+    //验证用户名
+    @RequestMapping(&quot;/check&quot;)
+    public void check(String username, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        User user = userDao.check(username);
+        if (user == null) {
+            //说明该用户名可以注册
+            out.print(1);
+        } else {
+            //说明该用户名已经被注册
+            out.print(0);
+        }
+    }
+
+    //注册功能
+    @RequestMapping(&quot;/register&quot;)
+    public String register(User user){
+        userDao.save(user);
+        //重定向
+        return &quot;redirect:/&quot;;
+    }
+}
+</code></pre>
+
+<h2 id="第四步">第四步：</h2>
+
+<h3 id="创建拦截器interceptor">创建拦截器Interceptor：</h3>
+
+<pre><code>package com.example.demo.interceptor;
+
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * 用户登录验证拦截器
+ */
+public class MyAdminInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
+        Object obj = request.getSession().getAttribute(&quot;user&quot;);
+        if (obj == null) {
+            //说明没有登录
+            //1.提示
+            request.setAttribute(&quot;msg&quot;, &quot;请先登录!&quot;);
+            //2.强制跳转
+            request.getRequestDispatcher(&quot;/&quot;).forward(request, response);
+            return false;
+        }
+        //放行
+        return true;
+    }
+}
+</code></pre>
+
+<h2 id="第五步">第五步：</h2>
+
+<h3 id="创建springboot自定义类-我们需要根据需求自己配置拦截器">创建springboot自定义类。我们需要根据需求自己配置拦截器。</h3>
+
+<pre><code>package com.example.demo.Config;
+
+import com.example.demo.interceptor.MyAdminInterceptor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+//springboot配置类
+@Configuration
+public class MyMvcConfig implements WebMvcConfigurer {
+
+    //配置拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new MyAdminInterceptor())
+                //配置拦截路径
+                .addPathPatterns(&quot;/**&quot;)
+                //配置从拦截路径中去除的路径
+                .excludePathPatterns(&quot;/index.html&quot;, &quot;/&quot;, &quot;/user/*&quot;, &quot;/asserts/**&quot;);
+    }
+}
+</code></pre>
+
+<h2 id="第六步">第六步：</h2>
+
+<h3 id="最后-记得编辑application-yml文件">最后，记得编辑application.yml文件：</h3>
+
+<pre><code>server:
+  port: 8888
+  servlet:
+    context-path: /erp
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: ***
+    password: ***
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+  mvc:
+    favicon:
+      enabled: false
+
+</code></pre>
+
+<h2 id="结束">结束。</h2>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

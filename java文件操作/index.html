@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // panyinglang</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="panyinglang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://panyinglang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="JAVA 文件操作 读取文件 文件读取到计算机的步骤： 1.获取文件： File file = new File(path) 2.建立文件输入流对象：FileInputStream fileInputStream = new FileInputStream(file) 3.建立输入流对象：InputStreamReader reader = new InputStreamReader(fileInputStream); 4.建立缓冲区：BufferedReader br = new BufferedReader(reader); 5.现在可以读取文件内容到内存了，这里每次读取一行：br.readLine() 6.文件读取完毕，关闭文件流：br.close() 记得使用try{}catch(){}块捕获并处理文件读取异常，也可以选择throw 基本代码如下：
+try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw /* 读入TXT文件 */ String pathname = &quot;F:\\JAVA\\workspace\\day15Task\\src\\task01\\Date.txt&quot;; // 文件路径（也可以是相对路径） File filename = new File(pathname); // 要读取以上路径的Product.txt文件 InputStreamReader reader = new InputStreamReader(new FileInputStream(filename)); // 建立一个输入流对象reader BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言 String line = &quot;&quot;; line = br."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="JAVA 文件操作 读取文件 文件读取到计算机的步骤： 1.获取文件： File file = new File(path) 2.建立文件输入流对象：FileInputStream fileInputStream = new FileInputStream(file) 3.建立输入流对象：InputStreamReader reader = new InputStreamReader(fileInputStream); 4.建立缓冲区：BufferedReader br = new BufferedReader(reader); 5.现在可以读取文件内容到内存了，这里每次读取一行：br.readLine() 6.文件读取完毕，关闭文件流：br.close() 记得使用try{}catch(){}块捕获并处理文件读取异常，也可以选择throw 基本代码如下：
+try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw /* 读入TXT文件 */ String pathname = &quot;F:\\JAVA\\workspace\\day15Task\\src\\task01\\Date.txt&quot;; // 文件路径（也可以是相对路径） File filename = new File(pathname); // 要读取以上路径的Product.txt文件 InputStreamReader reader = new InputStreamReader(new FileInputStream(filename)); // 建立一个输入流对象reader BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言 String line = &quot;&quot;; line = br." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://panyinglang.github.io/java%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://panyinglang.github.io/"><img class="app-header-avatar" src="/image/avatar.jpg" alt="panyinglang" /></a>
+      <h1>panyinglang</h1>
+      <p>New Bee</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/panyinglang"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="java-文件操作">JAVA 文件操作</h1>
+
+<h2 id="读取文件">读取文件</h2>
+
+<p>文件读取到计算机的步骤：
+1.获取文件： <code>File file = new File(path)</code>
+2.建立文件输入流对象：<code>FileInputStream fileInputStream = new FileInputStream(file)</code>
+3.建立输入流对象：<code>InputStreamReader reader = new InputStreamReader(fileInputStream);</code>
+4.建立缓冲区：<code>BufferedReader br = new BufferedReader(reader);</code>
+5.现在可以读取文件内容到内存了，这里每次读取一行：<code>br.readLine()</code>
+6.文件读取完毕，关闭文件流：<code>br.close()</code>
+<strong>记得使用<code>try{}catch(){}</code>块捕获并处理文件读取异常，也可以选择<code>throw</code></strong>
+基本代码如下：</p>
+
+<pre><code>try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw  
+              
+            /* 读入TXT文件 */  
+            String pathname = &quot;F:\\JAVA\\workspace\\day15Task\\src\\task01\\Date.txt&quot;; // 文件路径（也可以是相对路径） 
+            File filename = new File(pathname); // 要读取以上路径的Product.txt文件  
+            InputStreamReader reader = new InputStreamReader(new FileInputStream(filename)); // 建立一个输入流对象reader  
+            BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言  
+            String line = &quot;&quot;;
+            line = br.readLine();  
+            while (line != null) {
+                line = br.readLine(); // 一次读入一行数据  
+            }
+            br.close();//关闭文件流
+        } catch (Exception e) {  
+            System.out.println(&quot;文件读取失败&quot;);
+            e.printStackTrace(); 
+        } 
+</code></pre>
+
+<p>持续更新&hellip;&hellip;</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

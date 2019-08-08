@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>panyinglang</title>
+    <link>https://panyinglang.github.io/</link>
+    <description>Recent content on panyinglang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Aug 2019 21:26:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://panyinglang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Map集合</title>
+      <link>https://panyinglang.github.io/post/map%E9%9B%86%E5%90%88/</link>
+      <pubDate>Wed, 07 Aug 2019 21:26:18 +0800</pubDate>
+      
+      <guid>https://panyinglang.github.io/post/map%E9%9B%86%E5%90%88/</guid>
+      <description>笔记 Map Map 使用迭代器  使用 map.keySet()获得键的视图，或者map.keySet().iterator()直接获得迭代器 使用迭代器.next()拿到键 key 使用map.getKey(key)获得键值 value 可以输出键值 value 了 具体代码如下： Map 初始化：
+Map&amp;lt;String,ArrayList&amp;lt;Student&amp;gt;&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); ArrayList&amp;lt;Student&amp;gt; list1 = new ArrayList&amp;lt;&amp;gt;(); ArrayList&amp;lt;Student&amp;gt; list2 = new ArrayList&amp;lt;&amp;gt;(); list1.add(new Student(&amp;quot;zhang3&amp;quot;,&amp;quot;10000&amp;quot;)); list1.add(new Student(&amp;quot;li4&amp;quot;,&amp;quot;10001&amp;quot;)); list2.add(new Student(&amp;quot;zhao4&amp;quot;,&amp;quot;10002&amp;quot;)); list2.add(new Student(&amp;quot;liuneng&amp;quot;,&amp;quot;10003&amp;quot;)); map.put(&amp;quot;长沙&amp;quot;, list1); map.put(&amp;quot;东北&amp;quot;, list2);   使用迭代器迭代打印：
+Iterator&amp;lt;String&amp;gt; i = map.keySet().iterator(); while(i.hasNext()) { String key = i.next(); ArrayList&amp;lt;Student&amp;gt; stu = map.get(key); System.out.println(key); for(int j = 0; j &amp;lt; stu.size(); j ++) { System.</description>
+    </item>
+    
+    <item>
+      <title>JAVA文件操作</title>
+      <link>https://panyinglang.github.io/post/java%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Wed, 07 Aug 2019 21:25:59 +0800</pubDate>
+      
+      <guid>https://panyinglang.github.io/post/java%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+      <description>JAVA 文件操作 读取文件 文件读取到计算机的步骤：
+1.获取文件： File file = new File(path)
+2.建立文件输入流对象：FileInputStream fileInputStream = new FileInputStream(file)
+3.建立输入流对象：InputStreamReader reader = new InputStreamReader(fileInputStream);
+4.建立缓冲区：BufferedReader br = new BufferedReader(reader);
+5.现在可以读取文件内容到内存了，这里每次读取一行：br.readLine()
+6.文件读取完毕，关闭文件流：br.close()
+记得使用try{}catch(){}块捕获并处理文件读取异常，也可以选择throw 基本代码如下：
+try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw /* 读入TXT文件 */ String pathname = &amp;quot;F:\\JAVA\\workspace\\day15Task\\src\\task01\\Date.txt&amp;quot;; // 文件路径（也可以是相对路径） File filename = new File(pathname); // 要读取以上路径的Product.txt文件 InputStreamReader reader = new InputStreamReader(new FileInputStream(filename)); // 建立一个输入流对象reader BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言 String line = &amp;quot;&amp;quot;; line = br.</description>
+    </item>
+    
+    <item>
+      <title>多态的理解</title>
+      <link>https://panyinglang.github.io/post/%E5%A4%9A%E6%80%81%E7%9A%84%E7%90%86%E8%A7%A3/</link>
+      <pubDate>Sat, 27 Jul 2019 15:35:11 +0800</pubDate>
+      
+      <guid>https://panyinglang.github.io/post/%E5%A4%9A%E6%80%81%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
+      <description>多态 多态 　多态性是允许你将父对象设置成为一个或更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同的方式运作。简单的说，就是一句话：允许将子类类型的指针赋值给父类类型的指针。多态性在Object Pascal和C++中都是通过虚函数实现的。
+　这里用java来实现，实现一下最简单的多态。
+ 例题： 当顾客在商场购物时，卖家需要根据顾客的需求提取商品。对于汽车销售商场也是如此。用户需要先指定购买的车型，然后商家去提取该车型的汽车。模拟该场景，编写一个父类Car，可以获得车的具体信息，包括车品牌，价格等，然后编写多个子类，用户输入不同的品牌，要求得到对应的车和价格，例如输入“宝马”，输出：您获得一辆宝马车，价格30万。
+ Car类：
+public class Car { private String carName; private double price; public Car() { super(); } public Car(String carName, double price) { super(); this.carName = carName; this.price = price; } public String getCarName() { return carName; } public void setCarName(String carName) { this.carName = carName; } public double getPrice() { return price; } public void setPrice(double price) { this.</description>
+    </item>
+    
+    <item>
+      <title>快速排序备忘录</title>
+      <link>https://panyinglang.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%A4%87%E5%BF%98%E5%BD%95/</link>
+      <pubDate>Thu, 25 Jul 2019 20:53:56 +0800</pubDate>
+      
+      <guid>https://panyinglang.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%A4%87%E5%BF%98%E5%BD%95/</guid>
+      <description>快速排序 java实现 原理 　快速排序的原理：选择一个关键值作为基准值。比基准值小的都在左边序列（一般是无序的），比基准值大的都在右边（一般是无序的）。一般选择序列的第一个元素。
+　一次循环：从后往前比较，用基准值和最后一个值比较，如果比基准值小的交换位置，如果没有继续比较下一个，直到找到第一个比基准值小的值才交换。找到这个值之后，又从前往后开始比较，如果有比基准值大的，交换位置，如果没有继续比较下一个，直到找到第一个比基准值大的值才交换。直到从前往后的比较索引&amp;gt;从后往前比较的索引，结束第一次循环，此时，对于基准值来说，左右两边就是有序的了。接着分别比较左右两边的序列，重复上述的循环。
+例如: 数组 int[] arr={5,2,8,4,9,1}; 第一趟排序：选 5 为关键字,low=0,high=5 从 high 开始由，后向前找，找到比 5 小的第一个数 a[5]=1,进行替换 排序结果为:1 2 8 4 9 5 从 low 开始向后搜索,找到比 5 小的,交换 1 2 5 4 9 8 从 high 开始由，后向前找，找到比 5 小,交换 1 2 4 5 9 8 直至 low 与 high 相遇重合,第一趟排序结束 以关键字为界,分成左右两个子序列,左边都比 5 小,右边都比 5 大 排序结果:1 2 4 5 9 8
+第二趟排序： 以相同的方式排序左子序列 1 2 4 选 1 为关键字 ,low=0,high=2 从 high 开始由，后向前找,找到比 1 小,没有,直至 low 与 high 相遇重合,第二趟 排序结束 第二趟以 1 为界,将左子序列分为两个序列,左边没有数据,右边 2,4 两个序列 排序结果: 1 2 4 5 9 8</description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>https://panyinglang.github.io/past/blog/</link>
+      <pubDate>Wed, 17 Jul 2019 20:39:52 +0800</pubDate>
+      
+      <guid>https://panyinglang.github.io/past/blog/</guid>
+      <description>用Spring框架搭建简单的登录注册与查询模块后台的最基本流程（配合maven和oracle数据库） 首先：修改pom.xml文件： 主要是将数据库连接插件下载到本地仓库 pom.xml文件的内容：
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xsi:schemaLocation=&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&amp;gt; &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt; &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.1.3.RELEASE&amp;lt;/version&amp;gt; &amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt; &amp;lt;/parent&amp;gt; &amp;lt;groupId&amp;gt;com.gem&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;erp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;name&amp;gt;erp&amp;lt;/name&amp;gt; &amp;lt;description&amp;gt;erp&amp;lt;/description&amp;gt; &amp;lt;properties&amp;gt; &amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt; &amp;lt;/properties&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-data-jpa&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-thymeleaf&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt; &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-test&amp;lt;/artifactId&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.oracle&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;ojdbc6&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;12.1.0.1-atlassian-hosted&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt; &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-maven-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;/plugin&amp;gt; &amp;lt;/plugins&amp;gt; &amp;lt;/build&amp;gt; &amp;lt;/project&amp;gt;  第一步： 新建java类，该类对应数据库中所需的表。类中定义好自己需要的属性。下载lombok插件,该插件会自动生成对应属性的方法，操作的方法是如下： /** * 员工实体类 */ //利用lombok工具自动生成构造,get/set,hashcode,equals,toString方法 @Data @NoArgsConstructor @AllArgsConstructor //springdata JPA自动映射实体类和表的关系 @Entity @Table(name = &amp;quot;ERP_EMP&amp;quot;) public class Employee { //属性 @Id @GeneratedValue(strategy = GenerationType.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://panyinglang.github.io/java%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://panyinglang.github.io/java%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+      <description>JAVA 文件操作 读取文件 文件读取到计算机的步骤： 1.获取文件： File file = new File(path) 2.建立文件输入流对象：FileInputStream fileInputStream = new FileInputStream(file) 3.建立输入流对象：InputStreamReader reader = new InputStreamReader(fileInputStream); 4.建立缓冲区：BufferedReader br = new BufferedReader(reader); 5.现在可以读取文件内容到内存了，这里每次读取一行：br.readLine() 6.文件读取完毕，关闭文件流：br.close() 记得使用try{}catch(){}块捕获并处理文件读取异常，也可以选择throw 基本代码如下：
+try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw /* 读入TXT文件 */ String pathname = &amp;quot;F:\\JAVA\\workspace\\day15Task\\src\\task01\\Date.txt&amp;quot;; // 文件路径（也可以是相对路径） File filename = new File(pathname); // 要读取以上路径的Product.txt文件 InputStreamReader reader = new InputStreamReader(new FileInputStream(filename)); // 建立一个输入流对象reader BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言 String line = &amp;quot;&amp;quot;; line = br.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://panyinglang.github.io/map%E9%9B%86%E5%90%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://panyinglang.github.io/map%E9%9B%86%E5%90%88/</guid>
+      <description>笔记 Map Map 使用迭代器  使用 map.keySet()获得键的视图，或者map.keySet().iterator()直接获得迭代器 使用迭代器.next()拿到键 key 使用map.getKey(key)获得键值 value 可以输出键值 value 了 具体代码如下： Map 初始化：
+Map&amp;lt;String,ArrayList&amp;lt;Student&amp;gt;&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); ArrayList&amp;lt;Student&amp;gt; list1 = new ArrayList&amp;lt;&amp;gt;(); ArrayList&amp;lt;Student&amp;gt; list2 = new ArrayList&amp;lt;&amp;gt;(); list1.add(new Student(&amp;quot;zhang3&amp;quot;,&amp;quot;10000&amp;quot;)); list1.add(new Student(&amp;quot;li4&amp;quot;,&amp;quot;10001&amp;quot;)); list2.add(new Student(&amp;quot;zhao4&amp;quot;,&amp;quot;10002&amp;quot;)); list2.add(new Student(&amp;quot;liuneng&amp;quot;,&amp;quot;10003&amp;quot;)); map.put(&amp;quot;长沙&amp;quot;, list1); map.put(&amp;quot;东北&amp;quot;, list2);  使用迭代器迭代打印：
+Iterator&amp;lt;String&amp;gt; i = map.keySet().iterator(); while(i.hasNext()) { String key = i.next(); ArrayList&amp;lt;Student&amp;gt; stu = map.get(key); System.out.println(key); for(int j = 0; j &amp;lt; stu.size(); j ++) { System.</description>
+    </item>
+    
+  </channel>
+</rss>
