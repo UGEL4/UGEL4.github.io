@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>C&#43;&#43;的一些常用函数 // panyinglang</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="panyinglang" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://panyinglang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43;的一些常用函数"/>
+<meta name="twitter:description" content="C&#43;&#43; 的一些常用函数 顺序查找 int sequentialSearch(T a[], int n, const T&amp; x) template&lt;class T&gt; int sequentialSearch(T a[], int n, const T&amp; x) { //如果找到，返回下标，否则返回 -1 int i; for(i = 0; i &lt; n &amp;&amp; a[i] != x; i&#43;&#43;) if(i == n) return -1; else return i; } //递归方法 template&lt;class T&gt; int sequentialSearch(T a[], int n, const T&amp; x) { //如果找到，返回下标，否则返回 -1 if(n &lt; 1) return -1; if(a[n - 1] == x) return n - 1; return sequentialSearch(a[], n - 1, x); }  indexOfMax(T a[], int n) 找最大值的下标 template&lt;class T&gt; int indexOfMax(T a[], int n) {//查找数组a[0:n-1]中的最大值的 if(n &lt;= 0) throw illegalParameterValue(&quot;n 必须大于 0&quot;); int indexOfMax = 0; for(int i = 1; i &lt; n; i&#43;&#43;) { if(a[indexOfMax] &lt; a[i]) indexOfMax = i; return indexOfMax; } }  排序 swap(T&amp; x, T&amp; y ) 交换 template&lt;class T&gt; void Swap(T&amp; x, T&amp; y) { T temp; temp = x; x = y; y = temp; }  selectionSort(T a[], int n) 选择排序 template&lt;class T&gt; void selectionSort(T a[], int n) {//排序数组 a[0:n-1] for(int size = n; size &gt; 1; size--) { int i = indexOfMax(a, size); Swap(a[i], a[size - 1]); } }  selectionSortPlus(T a[], int n) 及时终止选择排序 template&lt;class T&gt; void selectionSortPlus(T a[], int n) { boole sort = false; for(int i = n; !"/>
+
+    <meta property="og:title" content="C&#43;&#43;的一些常用函数" />
+<meta property="og:description" content="C&#43;&#43; 的一些常用函数 顺序查找 int sequentialSearch(T a[], int n, const T&amp; x) template&lt;class T&gt; int sequentialSearch(T a[], int n, const T&amp; x) { //如果找到，返回下标，否则返回 -1 int i; for(i = 0; i &lt; n &amp;&amp; a[i] != x; i&#43;&#43;) if(i == n) return -1; else return i; } //递归方法 template&lt;class T&gt; int sequentialSearch(T a[], int n, const T&amp; x) { //如果找到，返回下标，否则返回 -1 if(n &lt; 1) return -1; if(a[n - 1] == x) return n - 1; return sequentialSearch(a[], n - 1, x); }  indexOfMax(T a[], int n) 找最大值的下标 template&lt;class T&gt; int indexOfMax(T a[], int n) {//查找数组a[0:n-1]中的最大值的 if(n &lt;= 0) throw illegalParameterValue(&quot;n 必须大于 0&quot;); int indexOfMax = 0; for(int i = 1; i &lt; n; i&#43;&#43;) { if(a[indexOfMax] &lt; a[i]) indexOfMax = i; return indexOfMax; } }  排序 swap(T&amp; x, T&amp; y ) 交换 template&lt;class T&gt; void Swap(T&amp; x, T&amp; y) { T temp; temp = x; x = y; y = temp; }  selectionSort(T a[], int n) 选择排序 template&lt;class T&gt; void selectionSort(T a[], int n) {//排序数组 a[0:n-1] for(int size = n; size &gt; 1; size--) { int i = indexOfMax(a, size); Swap(a[i], a[size - 1]); } }  selectionSortPlus(T a[], int n) 及时终止选择排序 template&lt;class T&gt; void selectionSortPlus(T a[], int n) { boole sort = false; for(int i = n; !" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://panyinglang.github.io/post/c&#43;&#43;%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" />
+<meta property="article:published_time" content="2019-08-14T21:17:03&#43;08:00"/>
+<meta property="article:modified_time" content="2019-08-14T21:17:03&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://panyinglang.github.io/"><img class="app-header-avatar" src="/image/avatar.jpg" alt="panyinglang" /></a>
+      <h1>panyinglang</h1>
+      <p>New Bee</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/panyinglang"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">C&#43;&#43;的一些常用函数</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 14, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="c-的一些常用函数">C++ 的一些常用函数</h1>
+
+<h2 id="顺序查找">顺序查找</h2>
+
+<h3 id="int-sequentialsearch-t-a-int-n-const-t-x">int sequentialSearch(T a[], int n, const T&amp; x)</h3>
+
+<pre><code>template&lt;class T&gt;
+int sequentialSearch(T a[], int n, const T&amp; x)
+{
+	//如果找到，返回下标，否则返回 -1
+    int i;
+    for(i = 0; i &lt; n &amp;&amp; a[i] != x; i++)
+    	if(i == n)
+    		return -1;
+    	else
+    		return i;
+}
+
+//递归方法
+template&lt;class T&gt;
+int sequentialSearch(T a[], int n, const T&amp; x)
+{
+	//如果找到，返回下标，否则返回 -1
+   if(n &lt; 1)
+   		return -1;
+   if(a[n - 1] == x)
+   		return n - 1;
+   	return sequentialSearch(a[], n - 1, x);
+}
+</code></pre>
+
+<h3 id="indexofmax-t-a-int-n-找最大值的下标">indexOfMax(T a[], int n) 找最大值的下标</h3>
+
+<pre><code>template&lt;class T&gt;
+int indexOfMax(T a[], int n)
+{//查找数组a[0:n-1]中的最大值的
+    if(n &lt;= 0)
+    	throw illegalParameterValue(&quot;n 必须大于 0&quot;);
+    int indexOfMax = 0;
+    for(int i = 1; i &lt; n; i++)
+    {
+        if(a[indexOfMax] &lt; a[i])
+        	indexOfMax = i;
+        return indexOfMax;
+    }
+}
+</code></pre>
+
+<hr />
+
+<h2 id="排序">排序</h2>
+
+<h3 id="swap-t-x-t-y-交换">swap(T&amp; x, T&amp; y ) 交换</h3>
+
+<pre><code>template&lt;class T&gt;
+void Swap(T&amp; x, T&amp; y)
+{
+    T temp;
+    temp = x;
+    x = y;
+    y = temp;
+}
+</code></pre>
+
+<h3 id="selectionsort-t-a-int-n-选择排序">selectionSort(T a[], int n) 选择排序</h3>
+
+<pre><code>template&lt;class T&gt;
+void selectionSort(T a[], int n)
+{//排序数组 a[0:n-1]
+    for(int size = n; size &gt; 1; size--)
+    {
+        int i = indexOfMax(a, size);
+        Swap(a[i], a[size - 1]);
+    }
+}
+</code></pre>
+
+<h3 id="selectionsortplus-t-a-int-n-及时终止选择排序">selectionSortPlus(T a[], int n) 及时终止选择排序</h3>
+
+<pre><code>template&lt;class T&gt;
+void selectionSortPlus(T a[], int n)
+{
+    boole sort = false;
+    for(int i = n; !sort &amp;&amp; (i &gt; 1); i--)
+    {
+        int indexOfMax = 0;
+        sotr = true;
+        for(int j = 1; j &lt; i; j++)
+        {
+            if(a[indexOfMax] &lt;= a[j])
+            	indexOfMax = j;
+            else
+            	sort = false;//无序
+        }
+        Swap(a[indexOfMax], a[j - 1]);
+    }
+}
+</code></pre>
+
+<p>　　及时终止选择排序，最好情况下外部 for 循环只走一次，比较次数为 n-1。最坏情况下，比较次
+数为(n-1)n/2，并且速度比选择排序要慢一些。</p>
+
+<h3 id="bubblesort-t-a-int-n-冒泡排序">bubbleSort(T a[], int n)冒泡排序</h3>
+
+<pre><code>template&lt;class T&gt;
+void bubbleSort(T a[], int n)
+{
+    for(int i = n; i &gt; 1; i--)
+        for(int j = 0; j &lt; n - 1; j ++)
+        {
+            if(a[j] &gt; a[j + 1])
+            	Swap(a[j], a[j + 1]);
+        }
+}
+</code></pre>
+
+<h3 id="bubblesort-t-a-int-n-及时终止冒泡排序">bubbleSort(T a[], int n) 及时终止冒泡排序</h3>
+
+<pre><code>template&lt;class T&gt;
+bool bubble(T a[], int n)
+{
+    bool swap = false;
+    for(int i = 0; i &lt; n - 1; i++)
+    {
+        if(a[i] &gt; a[i + 1])
+        {
+            Swap(a[i], a[i + 1]);
+            swap = true;//发生交换
+        }
+    }
+    return swap;
+}
+
+template&lt;class T&gt;
+void bubbleSort(T a[], int n)
+{
+    for(int i = n; i &gt; 1 &amp;&amp; bubble(a, i); i--)
+    {
+        
+    }
+}
+</code></pre>
+
+<p>　　最坏情况比较次数：n(n-1)/2；最好情况比较次数：n-1。</p>
+
+<h3 id="insertionsort-t-a-int-n-插入排序">insertionSort(T a[], int n) 插入排序</h3>
+
+<pre><code>template&lt;class T&gt;
+void insertionSort(T a[], int n)
+{
+    for(int i = 1; i &lt; n; i++)
+    {//把 a[i] 插入 a[0:i-1]
+        T t = a[i];
+        int j;
+        for(j = i - 1; j &gt;= 0 &amp;&amp; t &lt; a[j]; j--)
+        {
+            a[j + 1] = a[j];
+        }
+        a[j + 1] = t;
+    }
+}
+</code></pre>
+
+<p>　　最坏情况比较次数：n(n-1)/2；最好情况比较次数：n-1。
+　　</p>
+
+<hr />
+
+<h2 id="矩阵转置">矩阵转置</h2>
+
+<h3 id="transpose-t-a-int-rows-矩阵转置">transpose(T **a, int rows)  矩阵转置</h3>
+
+<pre><code>template&lt;class T&gt;
+void transpose(T **a, int rows)
+{//矩阵a[n][n] 转置
+	for(int i = 0; i &lt; rows; i++)
+	{
+        for(int j = i + 1; j &lt; rows; j++)
+        {
+            Swap(a[i][j], a[j][i]);
+        }
+	}
+}
+</code></pre>
+
+<h3 id="matrixadd-t-a-t-b-t-c-int-rows-int-cols-矩阵加法">matrixAdd(T **a, T **b, T **c, int rows, int cols) 矩阵加法</h3>
+
+<pre><code>template&lt;class T&gt;
+void matrixAdd(T **a, T **b, T **c, int rows, int cols)
+{
+    for(int i = 0; i &lt; rows; i++)
+    {
+        for(int j =0; j &lt;cols; j++)
+        {
+            c[i][j] = a[i][j] + b[i][j];
+        }
+    }
+}
+</code></pre>
+
+<hr />
+
+<p>持续更新。。。。。。</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

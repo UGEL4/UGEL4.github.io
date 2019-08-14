@@ -6,10 +6,19 @@
     <description>Recent content on panyinglang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Aug 2019 21:26:18 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 14 Aug 2019 21:17:03 +0800</lastBuildDate>
     
 	<atom:link href="https://panyinglang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C&#43;&#43;的一些常用函数</title>
+      <link>https://panyinglang.github.io/post/c&#43;&#43;%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Wed, 14 Aug 2019 21:17:03 +0800</pubDate>
+      
+      <guid>https://panyinglang.github.io/post/c&#43;&#43;%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
+      <description>C++ 的一些常用函数 顺序查找 int sequentialSearch(T a[], int n, const T&amp;amp; x) template&amp;lt;class T&amp;gt; int sequentialSearch(T a[], int n, const T&amp;amp; x) { //如果找到，返回下标，否则返回 -1 int i; for(i = 0; i &amp;lt; n &amp;amp;&amp;amp; a[i] != x; i++) if(i == n) return -1; else return i; } //递归方法 template&amp;lt;class T&amp;gt; int sequentialSearch(T a[], int n, const T&amp;amp; x) { //如果找到，返回下标，否则返回 -1 if(n &amp;lt; 1) return -1; if(a[n - 1] == x) return n - 1; return sequentialSearch(a[], n - 1, x); }  indexOfMax(T a[], int n) 找最大值的下标 template&amp;lt;class T&amp;gt; int indexOfMax(T a[], int n) {//查找数组a[0:n-1]中的最大值的 if(n &amp;lt;= 0) throw illegalParameterValue(&amp;quot;n 必须大于 0&amp;quot;); int indexOfMax = 0; for(int i = 1; i &amp;lt; n; i++) { if(a[indexOfMax] &amp;lt; a[i]) indexOfMax = i; return indexOfMax; } }  排序 swap(T&amp;amp; x, T&amp;amp; y ) 交换 template&amp;lt;class T&amp;gt; void Swap(T&amp;amp; x, T&amp;amp; y) { T temp; temp = x; x = y; y = temp; }  selectionSort(T a[], int n) 选择排序 template&amp;lt;class T&amp;gt; void selectionSort(T a[], int n) {//排序数组 a[0:n-1] for(int size = n; size &amp;gt; 1; size--) { int i = indexOfMax(a, size); Swap(a[i], a[size - 1]); } }  selectionSortPlus(T a[], int n) 及时终止选择排序 template&amp;lt;class T&amp;gt; void selectionSortPlus(T a[], int n) { boole sort = false; for(int i = n; !</description>
+    </item>
     
     <item>
       <title>Map集合</title>
