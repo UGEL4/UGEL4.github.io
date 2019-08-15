@@ -6,10 +6,21 @@
     <description>Recent content in Posts on panyinglang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Aug 2019 21:17:03 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 15 Aug 2019 18:31:21 +0800</lastBuildDate>
     
 	<atom:link href="https://panyinglang.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java实现MD5加密</title>
+      <link>https://panyinglang.github.io/post/java%E5%AE%9E%E7%8E%B0md5%E5%8A%A0%E5%AF%86/</link>
+      <pubDate>Thu, 15 Aug 2019 18:31:21 +0800</pubDate>
+      
+      <guid>https://panyinglang.github.io/post/java%E5%AE%9E%E7%8E%B0md5%E5%8A%A0%E5%AF%86/</guid>
+      <description>java 实现 MD5加密（笔记） MD5 是什么 　简单来说，MD5的全称为Message_Digest Algorithm-5，是一种信息摘要算法，，用于确保信 息传输完整一致。是计算机广泛使用的杂凑算法之一（又译摘要算法、哈希算法），主流编程语言 普遍已有MD5实现。但在java开发中也广泛使用，利用对登录时对其密码的加密等。
+java 实现 代码如下：
+public final class MD5Tool { private MD5Tool() {} public static String MD5(String str) { byte[] code = null; try { //生成md5加密计算摘要 MessageDigest md5 = MessageDigest.getInstance(&amp;quot;MD5&amp;quot;); md5.update(str.getBytes());//加密明文 code = md5.digest();//获取加密后的字节数组 } catch (NoSuchAlgorithmException e) { throw new RuntimeException(&amp;quot;没有这个算法&amp;quot;); } //将加密后的密文字节转成16进制字符串 String md5Code = new BigInteger(1, code).toString(16); //如果长度不够32位，就用 0 填充高位 for(int i = 0; i &amp;lt; 32 - md5Code.</description>
+    </item>
     
     <item>
       <title>C&#43;&#43;的一些常用函数</title>
