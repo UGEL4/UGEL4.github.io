@@ -6,10 +6,22 @@
     <description>Recent content in Posts on panyinglang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Aug 2019 18:31:21 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 24 Sep 2019 10:45:22 +0800</lastBuildDate>
     
 	<atom:link href="https://panyinglang.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MyBatis空指针踩坑记录</title>
+      <link>https://panyinglang.github.io/post/mybatis%E7%A9%BA%E6%8C%87%E9%92%88%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Tue, 24 Sep 2019 10:45:22 +0800</pubDate>
+      
+      <guid>https://panyinglang.github.io/post/mybatis%E7%A9%BA%E6%8C%87%E9%92%88%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</guid>
+      <description>MyBatis 空指针记录 自己封装数据源 DataSource 导致空指针异常 　第一次使用 MyBatis 的动态代理方式生成Mapper接口实现类的时候，在自己封装数据源 DataSource 的时候踩坑了，config配置文件和dao配置文件都配置正确，但就是在调用dao类接口 进行sql查询的时候（例如 dao.findAll()），报空指针异常。如下图：
+　查了各个地方，配置文件都是正确的，最后无奈只能在错误位置断点调试，然后发现了一些问 题，看下图：
+　可以看到，configuration 对象里面，在 environment 对象中，dataSource 对象中的各种属性都是 null，数据库 url ，用户名、密码等等都是 null，这就说明 dataSource没有初始化，这是怎么回事呢？查询各种资料后，才发现自己把 UnpooledDataSourceFactory 类中的 dataSource 对象和自己封装的 dataSource 对象搞混了。看下面的错诶代码：
+public class DruidDataSource extends UnpooledDataSourceFactory { static DataSource dataSource = null; static { loadProperties(); System.out.println(&amp;quot;初始化&amp;quot;); } private static void loadProperties(){ try { Properties property = new Properties(); ClassLoader loader = DruidDataSource.class.getClassLoader(); property.load(loader.getResourceAsStream(&amp;quot;db.properties&amp;quot;)); dataSource = DruidDataSourceFactory.createDataSource(property); } catch (Exception e) { e.</description>
+    </item>
     
     <item>
       <title>Java实现MD5加密</title>
