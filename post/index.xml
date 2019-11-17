@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on panyinglang</title>
+    <title>Posts on UGEL4</title>
     <link>https://github.com/UGEL4.github.io.git/post/</link>
-    <description>Recent content in Posts on panyinglang</description>
+    <description>Recent content in Posts on UGEL4</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 24 Sep 2019 10:45:22 +0800</lastBuildDate>
@@ -21,6 +21,15 @@
 　查了各个地方，配置文件都是正确的，最后无奈只能在错误位置断点调试，然后发现了一些问 题，看下图：
 　可以看到，configuration 对象里面，在 environment 对象中，dataSource 对象中的各种属性都是 null，数据库 url ，用户名、密码等等都是 null，这就说明 dataSource没有初始化，这是怎么回事呢？查询各种资料后，才发现自己把 UnpooledDataSourceFactory 类中的 dataSource 对象和自己封装的 dataSource 对象搞混了。看下面的错诶代码：
 public class DruidDataSource extends UnpooledDataSourceFactory { static DataSource dataSource = null; static { loadProperties(); System.out.println(&amp;quot;初始化&amp;quot;); } private static void loadProperties(){ try { Properties property = new Properties(); ClassLoader loader = DruidDataSource.class.getClassLoader(); property.load(loader.getResourceAsStream(&amp;quot;db.properties&amp;quot;)); dataSource = DruidDataSourceFactory.createDataSource(property); } catch (Exception e) { e.</description>
+    </item>
+    
+    <item>
+      <title>基数排序</title>
+      <link>https://github.com/UGEL4.github.io.git/post/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Thu, 05 Sep 2019 16:49:08 +0800</pubDate>
+      
+      <guid>https://github.com/UGEL4.github.io.git/post/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</guid>
+      <description></description>
     </item>
     
     <item>
