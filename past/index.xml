@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pasts on UGEL4</title>
-    <link>https://UGEL4.github.io.git/past/</link>
+    <link>https://UGEL4.github.io/past/</link>
     <description>Recent content in Pasts on UGEL4</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 17 Jul 2019 20:39:52 +0800</lastBuildDate>
     
-	<atom:link href="https://UGEL4.github.io.git/past/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://UGEL4.github.io/past/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Blog</title>
-      <link>https://UGEL4.github.io.git/past/blog/</link>
+      <link>https://UGEL4.github.io/past/blog/</link>
       <pubDate>Wed, 17 Jul 2019 20:39:52 +0800</pubDate>
       
-      <guid>https://UGEL4.github.io.git/past/blog/</guid>
+      <guid>https://UGEL4.github.io/past/blog/</guid>
       <description>用Spring框架搭建简单的登录注册与查询模块后台的最基本流程（配合maven和oracle数据库） 首先：修改pom.xml文件： 主要是将数据库连接插件下载到本地仓库 pom.xml文件的内容：
 &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xsi:schemaLocation=&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&amp;gt; &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt; &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.1.3.RELEASE&amp;lt;/version&amp;gt; &amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt; &amp;lt;/parent&amp;gt; &amp;lt;groupId&amp;gt;com.gem&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;erp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;name&amp;gt;erp&amp;lt;/name&amp;gt; &amp;lt;description&amp;gt;erp&amp;lt;/description&amp;gt; &amp;lt;properties&amp;gt; &amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt; &amp;lt;/properties&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-data-jpa&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-thymeleaf&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt; &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-test&amp;lt;/artifactId&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.oracle&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;ojdbc6&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;12.1.0.1-atlassian-hosted&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt; &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-maven-plugin&amp;lt;/artifactId&amp;gt; &amp;lt;/plugin&amp;gt; &amp;lt;/plugins&amp;gt; &amp;lt;/build&amp;gt; &amp;lt;/project&amp;gt;  第一步： 新建java类，该类对应数据库中所需的表。类中定义好自己需要的属性。下载lombok插件,该插件会自动生成对应属性的方法，操作的方法是如下： /** * 员工实体类 */ //利用lombok工具自动生成构造,get/set,hashcode,equals,toString方法 @Data @NoArgsConstructor @AllArgsConstructor //springdata JPA自动映射实体类和表的关系 @Entity @Table(name = &amp;quot;ERP_EMP&amp;quot;) public class Employee { //属性 @Id @GeneratedValue(strategy = GenerationType.</description>
     </item>
