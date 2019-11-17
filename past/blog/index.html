@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="panyinglang" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://panyinglang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+    <link rel="stylesheet" href="https://github.com/UGEL4.github.io.git/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
 
     
     <meta name="twitter:card" content="summary"/>
@@ -19,7 +19,7 @@
 <meta property="og:description" content="用Spring框架搭建简单的登录注册与查询模块后台的最基本流程（配合maven和oracle数据库） 首先：修改pom.xml文件： 主要是将数据库连接插件下载到本地仓库 pom.xml文件的内容：
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;2.1.3.RELEASE&lt;/version&gt; &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt; &lt;/parent&gt; &lt;groupId&gt;com.gem&lt;/groupId&gt; &lt;artifactId&gt;erp&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;name&gt;erp&lt;/name&gt; &lt;description&gt;erp&lt;/description&gt; &lt;properties&gt; &lt;java.version&gt;1.8&lt;/java.version&gt; &lt;/properties&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.projectlombok&lt;/groupId&gt; &lt;artifactId&gt;lombok&lt;/artifactId&gt; &lt;optional&gt;true&lt;/optional&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;com.oracle&lt;/groupId&gt; &lt;artifactId&gt;ojdbc6&lt;/artifactId&gt; &lt;version&gt;12.1.0.1-atlassian-hosted&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;/plugin&gt; &lt;/plugins&gt; &lt;/build&gt; &lt;/project&gt;  第一步： 新建java类，该类对应数据库中所需的表。类中定义好自己需要的属性。下载lombok插件,该插件会自动生成对应属性的方法，操作的方法是如下： /** * 员工实体类 */ //利用lombok工具自动生成构造,get/set,hashcode,equals,toString方法 @Data @NoArgsConstructor @AllArgsConstructor //springdata JPA自动映射实体类和表的关系 @Entity @Table(name = &quot;ERP_EMP&quot;) public class Employee { //属性 @Id @GeneratedValue(strategy = GenerationType." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://panyinglang.github.io/past/blog/" />
+<meta property="og:url" content="https://github.com/UGEL4.github.io.git/past/blog/" />
 <meta property="article:published_time" content="2019-07-17T20:39:52&#43;08:00"/>
 <meta property="article:modified_time" content="2019-07-17T20:39:52&#43;08:00"/>
 
@@ -27,7 +27,7 @@
   </head>
   <body>
     <header class="app-header">
-      <a href="https://panyinglang.github.io/"><img class="app-header-avatar" src="/image/avatar.jpg" alt="panyinglang" /></a>
+      <a href="https://github.com/UGEL4.github.io.git"><img class="app-header-avatar" src="/UGEL4.github.io.git/image/avatar.jpg" alt="panyinglang" /></a>
       <h1>panyinglang</h1>
       <p>New Bee</p>
       <div class="app-header-social">

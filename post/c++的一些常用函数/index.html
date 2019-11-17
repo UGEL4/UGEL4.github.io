@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="panyinglang" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://panyinglang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+    <link rel="stylesheet" href="https://github.com/UGEL4.github.io.git/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
 
     
     <meta name="twitter:card" content="summary"/>
@@ -17,7 +17,7 @@
     <meta property="og:title" content="C&#43;&#43;的一些常用函数" />
 <meta property="og:description" content="C&#43;&#43; 的一些常用函数 顺序查找 int sequentialSearch(T a[], int n, const T&amp; x) template&lt;class T&gt; int sequentialSearch(T a[], int n, const T&amp; x) { //如果找到，返回下标，否则返回 -1 int i; for(i = 0; i &lt; n &amp;&amp; a[i] != x; i&#43;&#43;) if(i == n) return -1; else return i; } //递归方法 template&lt;class T&gt; int sequentialSearch(T a[], int n, const T&amp; x) { //如果找到，返回下标，否则返回 -1 if(n &lt; 1) return -1; if(a[n - 1] == x) return n - 1; return sequentialSearch(a[], n - 1, x); }  indexOfMax(T a[], int n) 找最大值的下标 template&lt;class T&gt; int indexOfMax(T a[], int n) {//查找数组a[0:n-1]中的最大值的 if(n &lt;= 0) throw illegalParameterValue(&quot;n 必须大于 0&quot;); int indexOfMax = 0; for(int i = 1; i &lt; n; i&#43;&#43;) { if(a[indexOfMax] &lt; a[i]) indexOfMax = i; return indexOfMax; } }  排序 swap(T&amp; x, T&amp; y ) 交换 template&lt;class T&gt; void Swap(T&amp; x, T&amp; y) { T temp; temp = x; x = y; y = temp; }  selectionSort(T a[], int n) 选择排序 template&lt;class T&gt; void selectionSort(T a[], int n) {//排序数组 a[0:n-1] for(int size = n; size &gt; 1; size--) { int i = indexOfMax(a, size); Swap(a[i], a[size - 1]); } }  selectionSortPlus(T a[], int n) 及时终止选择排序 template&lt;class T&gt; void selectionSortPlus(T a[], int n) { boole sort = false; for(int i = n; !" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://panyinglang.github.io/post/c&#43;&#43;%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" />
+<meta property="og:url" content="https://github.com/UGEL4.github.io.git/post/c&#43;&#43;%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" />
 <meta property="article:published_time" content="2019-08-14T21:17:03&#43;08:00"/>
 <meta property="article:modified_time" content="2019-08-14T21:17:03&#43;08:00"/>
 
@@ -25,7 +25,7 @@
   </head>
   <body>
     <header class="app-header">
-      <a href="https://panyinglang.github.io/"><img class="app-header-avatar" src="/image/avatar.jpg" alt="panyinglang" /></a>
+      <a href="https://github.com/UGEL4.github.io.git"><img class="app-header-avatar" src="/UGEL4.github.io.git/image/avatar.jpg" alt="panyinglang" /></a>
       <h1>panyinglang</h1>
       <p>New Bee</p>
       <div class="app-header-social">
